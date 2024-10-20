@@ -1,0 +1,6 @@
+{
+    "service": {
+        "provider": "ollama",
+        "model": "llama3.2"
+    }
+}
