@@ -16,17 +16,17 @@ def find_command(prompt):
             return entry['command']
     return "I'm sorry, I don't have a command for that prompt."
 
-if __name__ == "__main__":
-    user_prompt = ' '.join(sys.argv[1:])
-    result = find_command(user_prompt)
-    print(result)
+# if __name__ == "__main__":
+#     user_prompt = ' '.join(sys.argv[1:])
+#     result = find_command(user_prompt)
+#     print(result)
 
 
 
 def ollama_module(text):
    f = open("config.json", "r")
-   config = json.load(f.read)
-   model_name = config.service.model
+   config = json.load(f)
+   model_name = config["service"]["model"]
    ollama.chat(model=model_name, messages=[
   {
     'role': 'user',
@@ -38,7 +38,7 @@ def ollama_module(text):
         'type': 'function',
         'function': {
           'name': 'find_command',
-          'description': 'Search through all avalible project types',
+          'description': 'Search through all avalible commandd groups.',
           'parameters': {
             'type': 'object',
             'properties': {
@@ -53,3 +53,10 @@ def ollama_module(text):
       },
     ],
 ) 
+   
+
+
+
+
+text = input("what do you want to ask")
+print(ollama_module(text))
